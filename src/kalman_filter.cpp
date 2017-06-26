@@ -41,14 +41,14 @@ void KalmanFilter::Update(const VectorXd &z) {
 
 void KalmanFilter::UpdateEKF(const VectorXd &z) {
 
-  meas = VectorXd(3);
+  VectorXd meas_ = VectorXd(3);
 
   float v_len = sqrt(pow(x_[0],  2) + pow(x_[1], 2));
   meas_ << v_len, atan2(x_[1], x_[0]), (x_[0]*x_[2] + x_[1]*x_[3]) / v_len;
   VectorXd y = z - meas_;
 
   MatrixXd S = H_ * P_ * H_.transpose() + R_;
-  MatrixXd K = P_ * Ht * S.inverse();
+  MatrixXd K = P_ * H_.transpose() * S.inverse();
 
   //Estimation
   x_ = x_ + (K * y);

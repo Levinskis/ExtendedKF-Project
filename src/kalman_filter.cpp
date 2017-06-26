@@ -34,7 +34,7 @@ void KalmanFilter::Update(const VectorXd &z) {
 
   //new estimate
   x_ = x_ + (K * y);
-  long x_size = x_.size();
+  int x_size = x_.size();
   MatrixXd I = MatrixXd::Identity(x_size, x_size);
   P_ = (I - K * H_) * P_;
 }
@@ -43,8 +43,8 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
 
   VectorXd meas_ = VectorXd(3);
 
-  float v_len = sqrt(pow(x_[0],  2) + pow(x_[1], 2));
-  meas_ << v_len, atan2(x_[1], x_[0]), (x_[0]*x_[2] + x_[1]*x_[3]) / v_len;
+  float v_len = sqrt(pow(x_(0),  2) + pow(x_(1), 2));
+  meas_ << v_len, atan2(x_(1), x_(0)), (x_(0)*x_(2) + x_(1)*x_(3)) / v_len;
   VectorXd y = z - meas_;
 
   MatrixXd S = H_ * P_ * H_.transpose() + R_;

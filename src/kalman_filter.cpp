@@ -27,10 +27,11 @@ void KalmanFilter::Predict() {
 void KalmanFilter::Update(const VectorXd &z) {
 
   //Measurment
-  VectorXd z_ = H_ * x_;
-  VectorXd y = z - z_;
-  MatrixXd S = H_ * P_ * H_.transpose() + R_;
-  MatrixXd K = P_ * H_.transpose() * S.inverse();
+  VectorXd y = z -  H_ * x_;
+  MatrixXd Ht = H_.transpose();
+  MatrixXd S = H_ * P_ * Ht + R_;
+  MatrixXd Si = S.inverse();
+  MatrixXd K = P_ * Ht * Si;
 
   //new estimate
   x_ = x_ + (K * y);
@@ -47,9 +48,10 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
   meas_ << v_len, atan2(x_(1), x_(0)), (x_(0)*x_(2) + x_(1)*x_(3)) / v_len;
   VectorXd y = z - meas_;
 
-  MatrixXd S = H_ * P_ * H_.transpose() + R_;
-  MatrixXd K = P_ * H_.transpose() * S.inverse();
-
+  MatrixXd Ht = H_.transpose();
+  MatrixXd S = H_ * P_ * Ht + R_;
+  MatrixXd Si = S.inverse();
+  MatrixXd K = P_ * Ht * Si;
   //Estimation
   x_ = x_ + (K * y);
   long x_size = x_.size();

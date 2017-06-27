@@ -1,3 +1,0 @@
-/mnt/c/Users/Aleksandrs/Documents/MOOCs/Udacity/SDCEngineer/Projects/ExtendedKF-Project/src/CMakeFiles/edit_cache.dir
-/mnt/c/Users/Aleksandrs/Documents/MOOCs/Udacity/SDCEngineer/Projects/ExtendedKF-Project/src/CMakeFiles/rebuild_cache.dir
-/mnt/c/Users/Aleksandrs/Documents/MOOCs/Udacity/SDCEngineer/Projects/ExtendedKF-Project/src/CMakeFiles/ExtendedKF.dir

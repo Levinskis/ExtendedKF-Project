@@ -3,7 +3,7 @@
 
 # Relative path conversion top directories.
 set(CMAKE_RELATIVE_PATH_TOP_SOURCE "/mnt/c/Users/Aleksandrs/Documents/MOOCs/Udacity/SDCEngineer/Projects/ExtendedKF-Project")
-set(CMAKE_RELATIVE_PATH_TOP_BINARY "/mnt/c/Users/Aleksandrs/Documents/MOOCs/Udacity/SDCEngineer/Projects/ExtendedKF-Project/src")
+set(CMAKE_RELATIVE_PATH_TOP_BINARY "/mnt/c/Users/Aleksandrs/Documents/MOOCs/Udacity/SDCEngineer/Projects/ExtendedKF-Project/build_")
 
 # Force unix paths in dependencies.
 set(CMAKE_FORCE_UNIX_PATHS 1)

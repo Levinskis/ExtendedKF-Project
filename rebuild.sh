@@ -1,5 +1,5 @@
 #!/bin/bash
-cd build_
+cd build
 make clean
 make
 cd ..

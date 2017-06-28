@@ -5,7 +5,7 @@ using Eigen::VectorXd;
 using Eigen::MatrixXd;
 using std::vector;
 
-const float almost_zero = 0.00001;
+const float almost_zero = 0.0001;
 
 Tools::Tools() {}
 
@@ -63,28 +63,28 @@ MatrixXd Tools::CalculateJacobian(const VectorXd& x_state) {
    	float vx = x_state(2);
    	float vy = x_state(3);
 
-    if (fabs(px) < almost_zero && fabs(py) < almost_zero){
-       return Hj;
-   }
+
+    //if (fabs(px) < almost_zero || fabs(py) < almost_zero || fabs(vy) < almost_zero || fabs(vx) < almost_zero){
+    //  px, py, vx, vy = almost_zero;
+      //return Hj;
+  // }
 
     //Coeficient calculations
     float coef_1 = pow(px, 2) + pow(py, 2);
-    float coef_2 = sqrt(coef_1);
-    float coef_3 = sqrt(pow(coef_3, 3));
 
-     if (fabs(coef_1) < almost_zero || fabs(coef_2) < almost_zero || fabs(coef_3) < almost_zero) {
+
+     if (fabs(coef_1) < pow(almost_zero,2) ) {
 
        std::cout << "Cannot calculate Jacobian, division by zero!"<< std::endl;
        std::cout << "In file:"<<__FILE__<<"Line number:"<<__LINE__<< std::endl;
 
-       return Hj;
+       coef_1 = pow(almost_zero,3);
+       //return Hj;
 
      }
 
-     coef_1 = (fabs(coef_1) < almost_zero) ? almost_zero: coef_1;
-     coef_2 = (fabs(coef_2) < almost_zero) ? almost_zero: coef_2;
-     coef_3 = (fabs(coef_3) < almost_zero) ? almost_zero: coef_3;
-
+     float coef_2 = sqrt(coef_1);
+     float coef_3 = sqrt(pow(coef_1, 3));
 
          Hj << px / coef_2, py / coef_2, 0, 0,
               -py / coef_1, px / coef_1, 0, 0,
@@ -92,17 +92,5 @@ MatrixXd Tools::CalculateJacobian(const VectorXd& x_state) {
                px * (vy * px - vx * py) / coef_3,
                px / coef_2, py / coef_2;
 
-
-
-     std::cout <<"coef_1 = " << coef_1 << endl;
-     std::cout <<"coef_2 = " << coef_2 << endl;
-     std::cout <<"coef_3 = " << coef_3 << endl;
-
-     std::cout <<"px = " << px << endl;
-     std::cout <<"py = " << py << endl;
-     std::cout <<"vx = " << vx << endl;
-     std::cout <<"vy = " << vy << endl;
-
-     std::cout <<"Hj = " << Hj << endl;
      return Hj;
 }
